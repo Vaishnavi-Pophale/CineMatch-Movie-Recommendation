@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<p class="eyebrow">SAVED FOR LATER</p><h1>Your watchlist</h1><div class="movie-grid">{% for movie in movies %}{% include "_movie_card.html" %}{% else %}<p>Your watchlist is empty. Explore movies and save the ones you want to watch.</p>{% endfor %}</div>{% endblock %}

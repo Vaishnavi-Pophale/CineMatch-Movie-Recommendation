@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Explore movies · CineMatch{% endblock %}{% block content %}
+<section class="hero"><p class="eyebrow">YOUR PERSONAL MOVIE GUIDE</p><h1>Find your next<br><span>movie obsession.</span></h1><p>Discover films picked around your taste.</p>
+<form class="searchbar" method="get"><input name="q" value="{{ q }}" placeholder="Search movies or stories...">
+<select name="genre"><option value="">All genres</option>{% for g in genres %}<option value="{{ g }}" {% if selected_genre==g %}selected{% endif %}>{{ g }}</option>{% endfor %}</select><button>Search</button></form></section>
+<section><div class="section-head"><div><p class="eyebrow">POPULAR RIGHT NOW</p><h2>Trending picks</h2></div></div><div class="movie-grid compact">{% for movie in trending %}{% include "_movie_card.html" %}{% endfor %}</div></section>
+<section><div class="section-head"><div><p class="eyebrow">THE COLLECTION</p><h2>{% if q or selected_genre %}Search results{% else %}Explore movies{% endif %}</h2></div><span class="muted">{{ movies|length }} titles</span></div>
+<div class="movie-grid">{% for movie in movies %}{% include "_movie_card.html" %}{% else %}<p>No movies found. Try another search.</p>{% endfor %}</div></section>
+{% endblock %}

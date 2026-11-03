@@ -1,0 +1,1 @@
+<article class="movie-card"><a href="{{ url_for('movie_detail', movie_id=movie.movieId) }}"><div class="poster"><span>🎞</span><small>{{ movie.year }}</small></div><div class="card-body"><h3>{{ movie.title }}</h3><p>{{ movie.genres|replace('|', ' · ') }}</p><span class="card-link">View details ↗</span></div></a></article>
