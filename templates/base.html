@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}CineMatch{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head><body>
+<header class="topbar"><a class="brand" href="{{ url_for('index') }}">🎬 CineMatch</a>
+<nav><a href="{{ url_for('index') }}">Explore</a>
+{% if session.get('user_id') %}<a href="{{ url_for('dashboard') }}">For You</a><a href="{{ url_for('watchlist') }}">Watchlist</a><a href="{{ url_for('logout') }}">Logout</a>
+{% else %}<a href="{{ url_for('login') }}">Login</a><a class="nav-cta" href="{{ url_for('register') }}">Sign up</a>{% endif %}
+<button id="themeToggle" class="theme-btn" type="button" aria-label="Toggle theme">☾</button></nav></header>
+<main class="container">
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+{% block content %}{% endblock %}
+</main><footer>CineMatch · Discover your next favourite movie</footer>
+<div class="chat-widget" id="chatWidget">
+  <button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open CineBot chat">💬 <span>Ask CineBot</span></button>
+  <section class="chat-panel" id="chatPanel" aria-label="CineBot movie assistant" hidden>
+    <div class="chat-header"><div><strong>🎬 CineBot</strong><small>Your personal movie assistant</small></div><div class="chat-header-actions"><button id="chatClear" type="button" title="Clear conversation" aria-label="Clear conversation">↻</button><button id="chatClose" type="button" aria-label="Close chat">×</button></div></div>
+    <div class="chat-messages" id="chatMessages" aria-live="polite"><div class="chat-bubble bot">Hi! I'm CineBot. Ask me for movie recommendations, popular films, or movies similar to a title. Type <b>help</b> to see examples.</div></div>
+    <div class="chat-suggestions" id="chatSuggestions"><button type="button" data-chat-prompt="Recommend action movies">Action</button><button type="button" data-chat-prompt="Start movie quiz">Movie quiz</button><button type="button" data-chat-prompt="Surprise me">Surprise me</button></div>
+    <form id="chatForm" class="chat-form"><button class="voice-btn" id="chatVoice" type="button" title="Speak" aria-label="Voice input">🎙</button><input id="chatInput" type="text" maxlength="500" placeholder="Ask about a movie..." autocomplete="off" required><button type="submit" aria-label="Send message">➤</button></form>
+    <div class="chat-note">Local movie assistant · Voice input availability depends on your browser.</div>
+  </section>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script></body></html>
